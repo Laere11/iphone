@@ -1,4 +1,27 @@
-<!-- For photos -->
-<input type="file" accept="image/*" capture="camera">
-<!-- For videos -->
-<input type="file" accept="video/*" capture="camcorder">
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>iPhone Camera Capture</title>
+  </head>
+  <body>
+    <!-- The capture attribute tells iOS to open the camera app -->
+    <input type="file" accept="image/*" capture="camera" id="cameraInput">
+    
+    <!-- A placeholder to preview the captured image -->
+    <img id="preview" alt="Photo preview" style="display: none; max-width: 100%; height: auto;">
+    
+    <script>
+      // Listen for a change event when a photo is taken or selected
+      const input = document.getElementById('cameraInput');
+      input.addEventListener('change', event => {
+        const file = event.target.files[0];
+        if (file) {
+          // Create a temporary URL to display the image in the browser
+          const preview = document.getElementById('preview');
+          preview.src = URL.createObjectURL(file);
+          preview.style.display = 'block';
+        }
+      });
+    </script>
+  </body>
+</html>
